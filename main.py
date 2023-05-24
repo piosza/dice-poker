@@ -7,70 +7,54 @@ print(" dice bone dwarf poker game ")
 print()
 
 
-
-
-
 def throw_the_dice():
     player = input(" player name, type here o  -->  ")
-    human_player = Player(player)
-    computer_player = Player("computer")
-    myNumbers = []
-    Lista = [1, 2, 3, 4, 5, 6]
+    # human_player = Player(player)
+    # computer_player = Player("computer")
+    mynumbers = []
+    lista = [1, 2, 3, 4, 5, 6]
 
-    while len(myNumbers) < 5:
-        newNumber = random.choice(Lista)
+    while len(mynumbers) < 5:
+        newnumber = random.choice(lista)
 
-        myNumbers.append(newNumber)
-    print(" the results of a man throwing the dice:", sorted(myNumbers))
+        mynumbers.append(newnumber)
+    print(" the results of a man throwing the dice:", sorted(mynumbers))
     print("")
-    computer_Numbers = []
-    Lista = [1, 2, 3, 4, 5, 6]
+    computer_numbers = []
+    clista = [1, 2, 3, 4, 5, 6]
 
-    while len(computer_Numbers) < 5:
-        newNumber = random.choice(Lista)
+    while len(computer_numbers) < 5:
+        newnumber = random.choice(lista)
 
-        computer_Numbers.append(newNumber)
-    print(" the results of a computer throwing the dice:", sorted(computer_Numbers))
+        computer_numbers.append(newnumber)
+    print(" the results of a computer throwing the dice:", sorted(computer_numbers))
+    roll_the_dice_decision(mynumbers, computer_numbers)
 
 
-print ("what dice roll do you want to roll again")
+print("what dice roll do you want to roll again")
 
-def roll_the_dice_decision():
-    x = int(input("set 1 if you want re roll the dices"))
-    y = int(input("set 2 if not "))
-    if x == 1:
-        q = int(input("how many dices do ypu want to roll 1 - 4"))
-        if q == 1:
-            second_throw1()
-        if q == 2:
-            second_throw2()
-        if q == 3:
-            second_throw3()
-        if q == 4:
-            second_throw4()
-    if y == 2:
-        who_win()
 
-def second_throw1(myNymbers):
-    print("chose field ")
-    z1 = int(input("set field for roll"))
-    Lista = [1, 2, 3, 4, 5, 6]
+def roll_the_dice_decision(mynumbers, computer_numbers):
+    do_re_roll = input("set 1 if you want re roll the dices, set 2 if not")
+    if do_re_roll == "1":
+        how_many_dices = int(input("how many dices do ypu want to roll 1 - 4"))
+        for i in range(how_many_dices):
+            which_dice_to_roll = int(input("which dice you want to roll "))
+            mynumbers[which_dice_to_roll - 1] = random.randint(1, 6)
+        print(" the results of a man re roll the dice:", (mynumbers))
 
-    while len(myNumbers) == z1:
-        newNumber = random.choice(Lista)
+    who_win(mynumbers, computer_numbers)
 
-        myNumbers.append(newNumber)
 
-def second_throw2():
-    print("chose fields ")
-
-def second_throw3():
-    print("chose fields ")
-
-def second_throw4():
-    print("chose fields ")
-
-def who_win():
+def who_win(mynumbers, computer_numbers):
+    human_points = sum(mynumbers)
+    computer_points = sum(computer_numbers)
+    if human_points > computer_points:
+        print(" human win")
+    elif human_points < computer_points:
+        print(" computer win")
+    else:
+        print("remis")
 
 
 throw_the_dice()
