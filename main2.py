@@ -10,16 +10,16 @@ player = input(" player name, type here o  -->  ")
 
 
 def main_game():
-    number_of_turns = int(input("enter the number of turns, enter an even number"))
     while True:
+        number_of_turns = int(input("enter the number of turns, enter an even number"))
         if number_of_turns % 2 == 0:
             print("positive_answer")
             for j in range(number_of_turns):
                 throw_the_dice()
-                break
+            break
+
         else:
             print("negative_answer")
-            break
 
 
 def throw_the_dice():
@@ -33,8 +33,8 @@ def throw_the_dice():
     mynumbers.sort()
     print(" the results of a man throwing the dice:", mynumbers)
     print("")
+    global computer_numbers
     computer_numbers = []
-    # lista = [1, 2, 3, 4, 5, 6]
 
     while len(computer_numbers) < 5:
         newnumber = random.choice(lista)
@@ -43,6 +43,8 @@ def throw_the_dice():
     computer_numbers.sort()
     print(" the results of a computer throwing the dice:", computer_numbers)
     roll_the_dice_decision(mynumbers, computer_numbers)
+    computer_run(computer_numbers)
+    calculation_who_win(mynumbers, computer_numbers, player)
 
 
 def roll_the_dice_decision(mynumbers, computer_numbers):
@@ -59,7 +61,59 @@ def roll_the_dice_decision(mynumbers, computer_numbers):
                 mynumbers.sort()
                 print(" the results of a man re roll the dice:", (mynumbers))
 
-    calculation_who_win(mynumbers, computer_numbers, player)
+
+def computer_run(computer_numbers):
+    a, b, c, d, e = computer_numbers
+    if a == b == c == d == e:
+        pass
+    elif a == b == c == d != e:
+        e = random.randint(1, 6)
+    elif b == c == d == e != a:
+        a = random.randint(1, 6)
+    elif a == b == c and d == e:
+        pass
+    elif a == b and c == d == e:
+        pass
+    elif a == 2 and b == 3 and c == 4 and d == 5:
+        e = random.randint(1, 6)
+    elif b == 2 and c == 3 and d == 4 and e == 6:
+        a = random.randint(1, 6)
+    elif a == b == c != d:
+        d = random.randint(1, 6)
+        e = random.randint(1, 6)
+    elif c == d == e != a:
+        a = random.randint(1, 6)
+        b = random.randint(1, 6)
+    elif b == c == d:
+        a = random.randint(1, 6)
+        e = random.randint(1, 6)
+    elif b == c and d == e:
+        a = random.randint(1, 6)
+    elif a == b and d == e:
+        c = random.randint(1, 6)
+    elif a == b and c == d:
+        e = random.randint(1, 6)
+    elif a == b:
+        c = random.randint(1, 6)
+        d = random.randint(1, 6)
+        e = random.randint(1, 6)
+    elif b == c:
+        a = random.randint(1, 6)
+        d = random.randint(1, 6)
+        e = random.randint(1, 6)
+    elif c == d:
+        a = random.randint(1, 6)
+        b = random.randint(1, 6)
+        e = random.randint(1, 6)
+    elif d == e:
+        a = random.randint(1, 6)
+        b = random.randint(1, 6)
+        c = random.randint(1, 6)
+    computer_numbers.sort()
+    print(" the results of a re roll computer throwing the dice:", computer_numbers)
+
+
+#    return computer_numbers
 
 
 def calculate_score(list_of_numbers):
@@ -100,60 +154,31 @@ def calculate_score(list_of_numbers):
     return score
 
 
-def computer_run(list_of_numbers):
-    a, b, c, d, e = list_of_numbers
-
-    if a == b == c == d == e:
-        a == b == c == d == e
-    elif a == b == c == d:
-        e = random.randint(1, 6)
-    elif b == c == d == e:
-        a = random.randint(1, 6)
-    elif a == b == c and d == e:
-        a == b == c and d == e
-    elif a == b and c == d == e:
-        a == b and c == d == e
-    elif a == 2 and b == 3 and c == 4 and d == 5:
-        e = random.randint(1, 6)
-    elif b == 2 and c == 3 and d == 4 and e == 6:
-        a = random.randint(1, 6)
-    elif a == b == c:
-        d = random.randint(1, 6)
-        e = random.randint(1, 6)
-    elif c == d == e:
-        score += 3
-    elif b == c == d:
-        score += 3
-    elif b == c and d == e:
-        score += 2
-    elif a == b and d == e:
-        score += 2
-    elif a == b and c == d:
-        score += 2
-    elif a == b:
-        score += 1
-    elif b == c:
-        score += 1
-    elif c == d:
-        score += 1
-    elif d == e:
-        score += 1
-
-
 def calculation_who_win(mynumbers, computer_numbers, player):
     human_score = calculate_score(mynumbers)
 
     computer_score = calculate_score(computer_numbers)
+
+    final_human_points = 0
+    final_computer_points = 0
 
     print(human_score)
     print(computer_score)
 
     if human_score > computer_score:
         print(f"You Win: { player} ")
+        final_human_points += 1
     elif human_score < computer_score:
         print(" computer win")
+        final_computer_points += 1
     else:
         print("remis")
+    print(
+        "final human point ",
+        final_human_points,
+        "final compuer point",
+        final_computer_points,
+    )
 
 
 main_game()
