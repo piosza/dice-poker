@@ -79,7 +79,8 @@ def throw_the_dice():
     computer_numbers.sort()
     print(" the results of a computer throwing the dice:", computer_numbers)
     roll_the_dice_decision(mynumbers, computer_numbers)
-    time.sleep(random.uniform(0, 3) * 3)
+    print("your opponet is thinking ")
+    time.sleep(random.uniform(0, 3))
     computer_numbers = computer_run(computer_numbers)
 
     return calculation_who_win(mynumbers, computer_numbers, player)
