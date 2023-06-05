@@ -79,6 +79,7 @@ def throw_the_dice():
     computer_numbers.sort()
     print(" the results of a computer throwing the dice:", computer_numbers)
     roll_the_dice_decision(mynumbers, computer_numbers)
+    time.sleep(random.uniform(0, 3) * 3)
     computer_numbers = computer_run(computer_numbers)
 
     return calculation_who_win(mynumbers, computer_numbers, player)
@@ -93,7 +94,7 @@ def roll_the_dice_decision(mynumbers, computer_numbers):
             print("wrong number you dzban")
             return False
         else:
-            for i in range(how_many_dices):
+            while how_many_dices:
                 which_dice_to_roll = int(input("which dice you want to roll "))
                 used_nb = which_dice_to_roll
                 #                if which_dice_to_roll in used_numbers:
@@ -102,8 +103,9 @@ def roll_the_dice_decision(mynumbers, computer_numbers):
                 mynumbers[which_dice_to_roll - 1] = random.randint(1, 6)
                 used_numbers.append(which_dice_to_roll)
                 print(used_numbers)
-                mynumbers.sort()
-                print(" the results of a man re roll the dice:", (mynumbers))
+                how_many_dices -= 1
+        mynumbers.sort()
+        print(" the results of a man re roll the dice:", (mynumbers))
 
 
 def computer_run(computer_numbers):
